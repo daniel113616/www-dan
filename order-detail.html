@@ -22,7 +22,7 @@
   <!--&ndash;&gt;-->
 
   <!-- ionic/angularjs js -->
-  <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+  <!--<script src="lib/ionic/js/ionic.bundle.min.js"></script>-->
 
   <!-- cordova script (this will be a 404 during development) -->
   <!--<script src="cordova.js"></script>-->
@@ -31,7 +31,7 @@
   <!--<script src="js/ctrls/orderDetail.js"></script>-->
   <script src="js/services.js"></script>
   <script type="text/javascript">
-    var shareFlag = false;//是否展示分享二维码
+    var shareFlag = true;//是否展示分享二维码
     window.onload = function () {
       document.getElementById('mask').hidden = !shareFlag;
       document.getElementById('qr-content').hidden = !shareFlag;
