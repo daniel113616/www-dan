@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>单单</title>
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">-->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!--&lt;!&ndash; IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above-->
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <!--&ndash;&gt;-->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <!--<script src="cordova.js"></script>-->
+    <script src="js/controllers.js"></script>
+    <!--<script src="js/ctrls/help.js"></script>-->
+    <!--<script src="js/ctrls/orderDetail.js"></script>-->
+    <script src="js/services.js"></script>
+    <script type="text/javascript">
+      var isShow = false;
+
+
+      function showDlg() {
+        var ui = document.getElementById("dlg");
+        ui.style.display = "block";
+
+      }
+      //    var htmlEl = angular.element(document.querySelector('html'));
+      //    htmlEl.on('click', function (event) {
+      //      var ui = document.getElementById("dlg");
+      //      if (event.target.nodeName === 'HTML') {
+      //        ui.style.display = "none";
+      //      }
+      //    })
+
+      function closeDlg() {
+        var ui = document.getElementById("dlg");
+        ui.style.display = "none";
+
+      }
+      function goSet() {
+
+      }
+    </script>
+  </head>
+  <body>
+  <div class="div-parent">
+    <!--<div class="bar bar-header bar-positive">-->
+      <!--<button class="button button-clear icon ion-ios-arrow-back"></button>-->
+    <!--<h1 class="title">我要贷款</h1>-->
+  <!--</div>-->
+
+  <div  class="">
+    <div class="loan-content has-header">
+      <div class="">
+        <p>可借额度</p>
+        <div class="money">￥100,000</div>
+        <p onclick="showDlg()">点击查看我的额度</p>
+      </div>
+    </div>
+  </ion-content>
+  </div>
+    <div name='dlg' id='dlg' style="display: none">
+      <div class="bb_mask" onclick="closeDlg()"></div>
+      <div class="bb_body-5">
+        <div class="modal-div">
+          <p>抱歉，您还不具备申请贷款额度的资格，申请收银服务后，即可获得</p>
+          <div class="dlg-lrbtn">
+            <div class="btn-l" onclick="closeDlg()">
+              暂不需要
+            </div>
+            <div class="btn-r" onclick="goSet()"><span>点击前往</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>

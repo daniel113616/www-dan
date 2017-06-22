@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>单单</title>
+
+  <!-- un-comment this code to enable service worker
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.log('Error', err));
+    }
+  </script>-->
+
+  <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">-->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!--&lt;!&ndash; IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above-->
+  <link href="css/ionic.app.css" rel="stylesheet">
+  <!--&ndash;&gt;-->
+
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <!--<script src="cordova.js"></script>-->
+  <!--<script src="myControl.js"></script>-->
+  <!--<script src="js/ctrls/help.js"></script>-->
+  <!--<script src="js/ctrls/orderDetail.js"></script>-->
+  <script src="js/services.js"></script>
+  <script type="text/javascript">
+    var shareFlag = false;//是否展示分享二维码
+    window.onload = function () {
+      document.getElementById('mask').hidden = !shareFlag;
+      document.getElementById('qr-content').hidden = !shareFlag;
+
+      document.getElementById('hasOrder').hidden = true;
+      document.getElementById('sureOrder').hidden = false;
+
+    }
+    var isShow = false;
+
+
+    function showDlg() {
+      var ui = document.getElementById("dlg");
+       ui.style.display = "block";
+
+    }
+//    var htmlEl = angular.element(document.querySelector('html'));
+//    htmlEl.on('click', function (event) {
+//      var ui = document.getElementById("dlg");
+//      if (event.target.nodeName === 'HTML') {
+//        ui.style.display = "none";
+//      }
+//    })
+
+    function closeDlg() {
+      var ui = document.getElementById("dlg");
+      ui.style.display = "none";
+
+    }
+
+    var countdown=5;
+    function settime(val) {//获取验证码接口请求正确后再倒计时
+      if (countdown == 0) {
+        val.removeAttribute("disabled");
+        val.value="获取验证码";
+        countdown = 5;
+      } else {
+        val.setAttribute("disabled", true);
+        val.value= "倒计时" + countdown + "s";
+        countdown--;
+        setTimeout(function() {
+          settime(val)
+        },1000)
+      }
+
+    }
+    function sureFunc() {
+      document.getElementById('hasOrder').hidden = false;
+      document.getElementById('sureOrder').hidden = true;
+      closeDlg();
+    }
+
+
+  </script>
+</head>
+<body>
+<div class="div-parent">
+  <!--<div class="bar bar-header bar-positive">-->
+    <!--<button class="button button-clear icon ion-ios-arrow-back"></button>-->
+    <!--<h1 class="title">订单详情</h1>-->
+  <!--</div>-->
+
+  <div class="">
+    <div class="order-detail-parent">
+      <span>正新鸡排大新店3月31号订单</span>
+      <div class="cai-content" id="cai-content" name="cai-content">
+        <p>蔬菜</p>
+        <span>白菜50斤、青菜10斤、萝卜3斤</span>
+        <p>猪肉</p>
+        <span>五花肉20斤、猪蹄10斤</span>
+        <p></p>
+        <span></span>
+
+        <!--<table id="cel_table" ng-repeat="c in newData">
+
+          <tr>
+            <td class="td1">
+              <div>
+                <span>马来西亚进口蔬菜</span>
+                <span>10.5斤</span>
+              </div>
+            </td>
+            <td class="td1">
+              <div>
+                <span>白菜</span>
+                <span>20斤</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="td1">
+              <div>
+                <span>马来西亚进口蔬菜</span>
+                <span>10.5斤</span>
+              </div>
+            </td>
+            <td class="td1">
+              <div>
+                <span>白菜</span>
+                <span>20斤</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="td1">
+              <div>
+                <span>马来西亚进口蔬菜</span>
+                <span>10.5斤</span>
+              </div>
+            </td>
+            <td class="td1">
+              <div>
+                <span>白菜</span>
+                <span>20斤</span>
+              </div>
+            </td>
+          </tr>
+        </table>-->
+      </div>
+    </div>
+
+
+  </div>
+  <div class="foot foot-div-btn" id="hasOrder">
+    <button class="button button-block button-stable">
+      已接单
+    </button>
+
+
+  </div>
+  <div class="foot foot-div-btn" id="sureOrder">
+
+    <button class="button button-block button-positive" onclick="showDlg()">
+      确认接单
+    </button>
+  </div>
+
+  <div name='dlg' id='dlg' style="display: none">
+    <div class="bb_mask" onclick="closeDlg()"></div>
+    <div class="bb_body-5">
+      <div class="input-modal-div">
+        <p>补齐手机号码可以确保您的订单准确接收</p>
+        <div class="input-div">
+          <input type="number" ng-model="data.mobile">
+        </div>
+        <div class="sms-div horizontal-view justify-content-space-between align-items-center margin-top-10">
+          <div class="input-div" style="width: 63%">
+            <input type="number" ng-model="data.mobile">
+          </div>
+          <div style="text-align: center;padding-left: 5px;width: 30%">
+            <input  class="btn-sms" style="background: transparent;border: 0" type="text" id="btn" value="获取验证码" onclick="settime(this)" readonly/>
+          </div>
+        </div>
+
+        <div class="dlg-btn-r">
+          <div class="" onclick="sureFunc()"><span>确认</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bb_mask" id="mask"></div>
+<div class="qr-content-parent" id="qr-content">
+  <div class="">
+    <p>长按二维码识别</p>
+    <p>即可查看订单所有内容</p>
+
+    <img src="img/qrcode.png">
+  </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

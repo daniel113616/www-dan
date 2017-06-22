@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>单单</title>
+
+  <!-- un-comment this code to enable service worker
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.log('Error', err));
+    }
+  </script>-->
+
+  <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">-->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!--&lt;!&ndash; IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above-->
+  <link href="css/ionic.app.css" rel="stylesheet">
+  <!--&ndash;&gt;-->
+
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <!--<script src="cordova.js"></script>-->
+  <script src="js/controllers.js"></script>
+  <!--<script src="js/ctrls/help.js"></script>-->
+  <!--<script src="js/ctrls/orderDetail.js"></script>-->
+  <script src="js/services.js"></script>
+
+  <script>
+    function nextFunc() {
+//        alert(11);
+      var ui = document.getElementById("dlg");
+      ui.style.display = "block";
+
+    }
+
+    function closeDlg() {
+      var ui = document.getElementById("dlg");
+      ui.style.display = "none";
+
+    }
+  </script>
+
+</head>
+<body>
+<div class="div-parent">
+  <div class="main-container">
+    <!--<div class="bar bar-header bar-positive">-->
+    <!--<button class="button button-clear icon ion-ios-arrow-back"></button>-->
+    <!--<h1 class="title">店铺收银</h1>-->
+    <!--</div>-->
+
+    <!--<div class="">-->
+
+    <h4>单单下单助手提供便捷的收单体系</h4>
+
+    <p style="margin-top: 20px">• 二维码收款：可支持支付宝、微信支付等多种支付方式</p>
+    <p>• 智能POS：可支持信用卡收款、二维码收单</p>
+    <p>• 支持多收银员：伙计和老板能第一时间了解付款情况</p>
+    <p>• 费率低，到账快。随时存取</p>
+    <p>• 可用日常流水获得大额信用贷款</p>
+
+    <div style="padding-top: 20px">
+
+      <button class="button button-block button-positive margin-top-20" onclick="nextFunc()">立即申请</button>
+    </div>
+    <!--</div>-->
+  </div>
+</div>
+
+<div name='dlg' id='dlg' style="display: none">
+  <div class="bb_mask" onclick="closeDlg()"></div>
+  <div class="bb_body-5">
+    <div class="modal-div">
+      <p>您的申请已收到，我们客服会在24小时之内与您联系！</p>
+      <div class="dlg-lrbtn">
+        <div class="btn-m" onclick="closeDlg()">
+          我知道了
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+

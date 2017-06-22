@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>单单</title>
+
+  <!-- un-comment this code to enable service worker
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.log('Error', err));
+    }
+  </script>-->
+
+  <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">-->
+  <link href="css/style.css" rel="stylesheet">
+
+  <script>
+    function boxFunc(index) {
+      if(index == 1){
+          location.href="help_1.html"
+      }else if(index == 2){
+        location.href="help_4.html"
+      }else if(index == 3){
+        location.href="help_2.html"
+      }else if(index == 4){
+        location.href="help_3.html"
+      }
+    }
+  </script>
+
+</head>
+<body style="margin: 0">
+<div class="div-parent">
+  <!--<div class="bar bar-header bar-positive">-->
+    <!--<button class="button button-clear icon ion-ios-arrow-back"></button>-->
+    <!--<h1 class="title">帮助中心</h1>-->
+  <!--</div>-->
+
+  <div class="">
+    <div class="horizontal-view align-items-center">
+      <div class="help-box border-r" onclick="boxFunc(1)">
+        公司介绍
+      </div>
+      <div class="help-box" onclick="boxFunc(2)">热门问题</div>
+    </div>
+    <div class="horizontal-view align-items-center">
+      <div class="help-box border-t border-r" onclick="boxFunc(3)">餐厅功能</div>
+      <div class="help-box border-t" onclick="boxFunc(4)">供应商功能</div>
+    </div>
+    </ion-content>
+  </div>
+</body>
+</html>
+
+
+
+
+
+

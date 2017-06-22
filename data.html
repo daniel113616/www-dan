@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>单单</title>
+
+  <!-- un-comment this code to enable service worker
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.log('Error', err));
+    }
+  </script>-->
+
+  <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">-->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!--&lt;!&ndash; IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above-->
+  <link href="css/ionic.app.css" rel="stylesheet">
+  <!--&ndash;&gt;-->
+
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <!--<script src="cordova.js"></script>-->
+  <script src="js/controllers.js"></script>
+  <!--<script src="js/ctrls/help.js"></script>-->
+  <!--<script src="js/ctrls/orderDetail.js"></script>-->
+  <script src="js/services.js"></script>
+  <script src="lib/echarts.min.js"></script>
+  <!--<script src="lib/zrender/tool/util.min.js"></script>-->
+  <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+
+  <script type="text/javascript">
+    window.onload = function () {
+//      document.getElementById('hisDataDiv').hidden = true;
+//      document.getElementById('shopDiv').hidden = false;
+
+      var obj = document.getElementById("leftRadio");
+      obj.style.cssText = "color: #4b8bf4;border-bottom: 1px solid #4b8bf4;";
+
+
+//      document.getElementById("tabLeft").style.cssText = "background-color: white;color:#000000";
+//      document.getElementById("tabRight").style.cssText = "background-color: #F2F2F2;color:#858585";
+    };
+
+//    function shopFunc() {//切换商店
+//      document.getElementById('hisDataDiv').hidden = true;
+//      document.getElementById('shopDiv').hidden = false;
+//
+//      document.getElementById("tabLeft").style.cssText = "background-color: white;color:#000000";
+//      document.getElementById("tabRight").style.cssText = "background-color: #F2F2F2;color:#858585";
+//
+//    };
+//    function hisDataFunc() {//切换历史数据
+//      document.getElementById('hisDataDiv').hidden = false;
+//      document.getElementById('shopDiv').hidden = true;
+//      document.getElementById("tabLeft").style.cssText = "background-color: #F2F2F2;color:#858585";
+//      document.getElementById("tabRight").style.cssText = "background-color: white;color:#000000";
+//    };
+//    function searchFunc() {//搜索
+//    };
+
+    var myChart;
+    var option;
+
+    // 路径配置
+    require.config({
+      paths: {
+        echarts: 'http://echarts.baidu.com/build/dist'
+      }
+    });
+
+    // 使用
+    require(
+      [
+        'echarts',
+        'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+      ],
+      function (ec) {
+        // 基于准备好的dom，初始化echarts图表
+//        var myChart = ec.init(document.getElementById('main'));
+
+        // 基于准备好的dom，初始化echarts图表
+        myChart = echarts.init(document.getElementById("main"));
+        option = {
+          title : {
+            text: '过去5天销量变化',
+          },
+          tooltip : {
+            trigger: 'axis'
+          },
+          legend: {
+            data:['最高销量','最低销量']
+          },
+
+          //右上角工具条
+          toolbox: {
+            show : true,
+            feature : {
+              mark : {show: true},
+              dataView : {show: true, readOnly: false},
+              magicType : {show: true, type: ['line', 'bar']},
+              restore : {show: true},
+              saveAsImage : {show: true}
+            }
+          },
+          calculable : true,
+          xAxis : [
+            {
+              type : 'category',
+              boundaryGap : false,
+              data : ['4月1号','4月2号','4月3号','4月4号','4月5号','4月6号','4月7号']//执行radioFunc数据可以改变
+            }
+          ],
+          yAxis : [
+            {
+              type : 'value',
+              axisLabel : {
+                formatter: '{value}'
+              }
+            }
+          ],
+          series : [
+            {
+              name:'销量',
+              type:'line',
+              data:[70, 50, 150, 80, 120,10,80],//执行radioFunc数据可以改变
+              itemStyle : {
+                normal :{
+                  color:'#4b8bf4'
+                }
+              }
+            },
+          ]
+        };
+
+        // 为echarts对象加载数据
+        myChart.setOption(option);
+      }
+    );
+
+    function radioFunc(index) {
+      if(index != 1){
+        document.getElementById("leftRadio").style.cssText = "color: darkgray;border-bottom: 1px solid darkgray;";
+      }else{
+        document.getElementById("leftRadio").style.cssText = "color: #4b8bf4;border-bottom: 1px solid #4b8bf4;";
+
+      }
+      //先改变值再重新执行刷新
+      myChart.setOption(option);
+    }
+
+  </script>
+</head>
+<body>
+<div class="div-parent">
+  <!--<div class="bar bar-header bar-positive">-->
+    <!--<button class="button button-clear icon ion-ios-arrow-back"></button>-->
+    <!--<h1 class="title">经营数据</h1>-->
+  <!--</div>-->
+  <!--<div class="bar bar-subheader bar-stable">-->
+    <!--<div class="button-bar">-->
+
+      <!--<a id="tabLeft" class="button button-clear" onclick="shopFunc()">店名</a>-->
+
+      <!--<a id="tabRight" class="button button-clear" onclick="hisDataFunc()">历史数据</a>-->
+
+    <!--</div>-->
+  <!--</div>-->
+  <div class="content">
+    <div class="shop-div" id="shopDiv">
+      <div class="shop-div-top">
+        <!--<p class="title-txt">今日已下单</p>-->
+        <p class="sub-title-txt" style="text-align: right;margin: 0;padding-right: 40px">本日最大量的是芹菜</p>
+        <div id="main" style="width: 100%;height:300px;"></div>
+
+        <div class="horizontal-view align-items-center justify-content-center">
+          <button class="radio-div" id="leftRadio" onclick="radioFunc(1)">7天</button>
+          <button class="radio-div" onclick="radioFunc(2)">本月</button>
+          <button class="radio-div" onclick="radioFunc(3)">上月</button>
+        </div>
+      </div>
+
+      <div class="bot-content-div">
+        <p class="content-time-p">2017-03-03 00:00 至 2017-03-03 23:59 的汇总</p>
+        <p class="content-p"><span>蔬菜类：</span>土豆10斤、西红柿15斤、白菜20斤、芹菜50斤</p>
+        <p class="content-p"><span>肉类：</span>牛肉10斤、土猪肉15斤、羊肉10斤</p>
+        <p class="content-p"><span>禽类：</span>鸡10只、鸡腿20个、鸡胸肉30个</p>
+      </div>
+    </div>
+
+
+    <!--<div id="hisDataDiv">-->
+      <!--<div class="list-div">-->
+
+        <!--<div class="item item-input-inset">-->
+          <!--<label class="item-input-wrapper">-->
+            <!--<input type="text" placeholder="请输入搜索关键字">-->
+          <!--</label>-->
+          <!--<button class="button button-small" onclick="searchFunc()">-->
+            <!--搜索-->
+          <!--</button>-->
+        <!--</div>-->
+        <!--<div class="line-h"></div>-->
+        <!--<ul class="list-div">-->
+
+          <!--<li class="list-item">-->
+            <!--Battletoads-->
+          <!--</li>-->
+          <!--<li class="list-item">-->
+            <!--Contra-->
+          <!--</li>-->
+          <!--<li class="list-item">-->
+            <!--Duck Tales-->
+          <!--</li>-->
+          <!--<li class="list-item">-->
+            <!--Mega Man-->
+          <!--</li>-->
+
+        <!--</ul>-->
+      <!--</div>-->
+
+    <!--</div>-->
+
+  </div>
+
+</div>
+</body>
+</html>
+
+
+
+
+
+

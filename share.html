@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>单单</title>
+
+  <!-- un-comment this code to enable service worker
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.log('Error', err));
+    }
+  </script>-->
+
+  <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">-->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!--&lt;!&ndash; IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above-->
+  <link href="css/ionic.app.css" rel="stylesheet">
+  <!--&ndash;&gt;-->
+
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <!--<script src="cordova.js"></script>-->
+  <script src="js/controllers.js"></script>
+  <!--<script src="js/ctrls/help.js"></script>-->
+  <!--<script src="js/ctrls/orderDetail.js"></script>-->
+  <script src="js/services.js"></script>
+
+</head>
+<body>
+<div class="div-parent">
+  <!--<div class="bar bar-header bar-positive">-->
+    <!--<button class="button button-clear icon ion-ios-arrow-back"></button>-->
+    <!--<h1 class="title">邀请好友加入单单</h1>-->
+  <!--</div>-->
+
+  <div class="has-header">
+    <div class="share_container">
+      <span>如果你觉得单单很好用，</span>
+      <span>可以邀请你的朋友一起使用</span>
+      <div>
+        <div ng-click="shareFunc(1)">
+          <img src="img/ic_wechat.png">
+          <span>通过微信邀请</span>
+        </div>
+        <div ng-click="shareFunc(2)">
+          <img src="img/ic_qq.png">
+          <span>通过QQ邀请</span>
+        </div>
+        <div ng-click="shareFunc(3)">
+          <img src="img/ic_msg.png">
+          <span>通过短信邀请</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
